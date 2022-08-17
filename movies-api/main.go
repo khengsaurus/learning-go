@@ -57,15 +57,15 @@ func getMovie(w http.ResponseWriter, r *http.Request) {
 
 func createMovie(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	var movie Movie
-	// can this work without _ = ...
-	_ = json.NewDecoder(r.Body).Decode(&movie) // Pass it into the memory slot ??
+	var movie Movie // HELP: pass it to the memory address ?
+	json.NewDecoder(r.Body).Decode(&movie)
 	movie.ID = strconv.Itoa(rand.Intn(1000))
 	movies = append(movies, movie)
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(movie)
 }
 
+// HELP: how to update in place?
 func updateMovie(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
@@ -74,7 +74,7 @@ func updateMovie(w http.ResponseWriter, r *http.Request) {
 		if item.ID == id {
 			movies = append(movies[:index], movies[index+1:]...)
 			var movie Movie
-			_ = json.NewDecoder(r.Body).Decode(&movie)
+			json.NewDecoder(r.Body).Decode(&movie)
 			movie.ID = id
 			movies = append(movies, movie)
 			w.WriteHeader(http.StatusOK)
