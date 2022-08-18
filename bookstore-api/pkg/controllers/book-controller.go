@@ -11,17 +11,9 @@ import (
 	"github.com/khengsaurus/go-tutorials/bookstore-api/pkg/utils"
 )
 
-// HELP in utils this fn can't be found?
-func json200(payload any, w http.ResponseWriter) {
-	res, _ := json.Marshal(payload)
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	w.Write(res)
-}
-
 func GetBooks(w http.ResponseWriter, r *http.Request) {
 	newBooks := models.GetAllBooks()
-	json200(newBooks, w)
+	utils.Json200(newBooks, w)
 }
 
 func GetBookById(w http.ResponseWriter, r *http.Request) {
@@ -51,7 +43,7 @@ func CreateBook(w http.ResponseWriter, r *http.Request) {
 	createBook := &models.Book{}
 	utils.ParseBody(r, createBook)
 	newBook := createBook.CreateBook()
-	json200(newBook, w)
+	utils.Json200(newBook, w)
 }
 
 func UpdateBook(w http.ResponseWriter, r *http.Request) {
@@ -71,7 +63,7 @@ func UpdateBook(w http.ResponseWriter, r *http.Request) {
 		book.Publication = updateBook.Publication
 	}
 	db.Save(&book)
-	json200(book, w)
+	utils.Json200(book, w)
 }
 
 func DeleteBook(w http.ResponseWriter, r *http.Request) {
@@ -80,5 +72,5 @@ func DeleteBook(w http.ResponseWriter, r *http.Request) {
 	_id := vars["bookId"]
 	id, _ := strconv.ParseInt(_id, 0, 0)
 	book := models.DeleteBook(id)
-	json200(book, w)
+	utils.Json200(book, w)
 }

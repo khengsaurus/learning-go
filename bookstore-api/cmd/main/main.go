@@ -6,9 +6,6 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	// "github.com/jinzhu/gorm"
-
-	// "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/khengsaurus/go-tutorials/bookstore-api/pkg/routes"
 )
 
