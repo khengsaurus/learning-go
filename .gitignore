@@ -1,4 +1,1 @@
 *.DS_Store
-
-/gql-api/graph/generated
-/gql-api/graph/model
