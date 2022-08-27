@@ -1,3 +1,5 @@
+https://www.youtube.com/watch?v=jFfo23yIWac 5:44:25
+
 NOTE: receiving status 502 from AWS API url
 
 build command: 
